@@ -35,9 +35,13 @@ const String _kDefaultErrorMessage =
 
 class RTCVideoRenderer extends ValueNotifier<RTCVideoValue>
     implements VideoRenderer {
-  RTCVideoRenderer()
+  RTCVideoRenderer({required this.rendererId, required this.isRemote})
       : _textureId = _textureCounter++,
         super(RTCVideoValue.empty);
+
+  final String rendererId;
+
+  final bool isRemote;
 
   static const _elementIdForAudioManager = 'html_webrtc_audio_manager_list';
 
@@ -85,8 +89,8 @@ class RTCVideoRenderer extends ValueNotifier<RTCVideoValue>
   @override
   bool get renderVideo => _srcObject != null;
 
-  String get _elementIdForAudio => 'audio_RTCVideoRenderer-$textureId';
-  String get _elementIdForVideo => 'video_RTCVideoRenderer-$textureId';
+  String get _elementIdForAudio => 'audio_RTCVideoRenderer-$rendererId';
+  String get _elementIdForVideo => 'video_RTCVideoRenderer-$rendererId';
 
   void _updateAllValues() {
     final element = findHtmlView();
@@ -131,10 +135,11 @@ class RTCVideoRenderer extends ValueNotifier<RTCVideoValue>
     }
 
     if (null != _audioStream) {
-      if (null == _audioElement) {
+      var checkElement = html.querySelector('#$_elementIdForAudio');
+      if (checkElement == null) {
         _audioElement = html.AudioElement()
           ..id = _elementIdForAudio
-          ..muted = stream.ownerTag == 'local'
+          ..muted = !isRemote
           ..autoplay = true;
         _ensureAudioManagerDiv().append(_audioElement!);
       }

@@ -4,7 +4,7 @@ import 'package:flutter/foundation.dart'
     show debugDefaultTargetPlatformOverride;
 import 'package:flutter/material.dart';
 import 'package:flutter_background/flutter_background.dart';
-import 'package:flutter_webrtc/flutter_webrtc.dart';
+import 'package:flutter_zwap_webrtc/flutter_webrtc.dart';
 
 import 'src/data_channel_sample.dart';
 import 'src/get_display_media_sample.dart';

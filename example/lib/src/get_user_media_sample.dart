@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_webrtc/flutter_webrtc.dart';
+import 'package:flutter_zwap_webrtc/flutter_webrtc.dart';
 import 'package:path_provider/path_provider.dart';
 
 /*
@@ -18,7 +18,7 @@ class GetUserMediaSample extends StatefulWidget {
 
 class _GetUserMediaSampleState extends State<GetUserMediaSample> {
   MediaStream? _localStream;
-  final _localRenderer = RTCVideoRenderer();
+  final _localRenderer = RTCVideoRenderer(rendererId: 'localRenderer', isRemote: false);
   bool _inCalling = false;
   bool _isTorchOn = false;
   MediaRecorder? _mediaRecorder;

@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:core';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_webrtc/flutter_webrtc.dart';
+import 'package:flutter_zwap_webrtc/flutter_webrtc.dart';
 
 class LoopBackSample extends StatefulWidget {
   static String tag = 'loopback_sample';
@@ -14,8 +14,8 @@ class LoopBackSample extends StatefulWidget {
 class _MyAppState extends State<LoopBackSample> {
   MediaStream? _localStream;
   RTCPeerConnection? _peerConnection;
-  final _localRenderer = RTCVideoRenderer();
-  final _remoteRenderer = RTCVideoRenderer();
+  final _localRenderer = RTCVideoRenderer(rendererId: 'localRenderer', isRemote: false);
+  final _remoteRenderer = RTCVideoRenderer(rendererId: 'remoteRenderer', isRemote: true);
   bool _inCalling = false;
   Timer? _timer;
 

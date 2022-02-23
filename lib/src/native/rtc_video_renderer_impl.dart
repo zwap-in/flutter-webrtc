@@ -10,7 +10,12 @@ import 'utils.dart';
 
 class RTCVideoRenderer extends ValueNotifier<RTCVideoValue>
     implements VideoRenderer {
-  RTCVideoRenderer() : super(RTCVideoValue.empty);
+  RTCVideoRenderer({required this.rendererId, required this.isRemote}) : super(RTCVideoValue.empty);
+
+  final String rendererId;
+
+  final bool isRemote;
+
   int? _textureId;
   MediaStream? _srcObject;
   StreamSubscription<dynamic>? _eventSubscription;
